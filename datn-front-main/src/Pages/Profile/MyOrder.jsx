@@ -25,7 +25,7 @@ import {
   ModalFooter,
   Select,
   InputGroup,
-  InputLeftElement,
+  // InputLeftElement,
 } from "@chakra-ui/react";
 import "react-slideshow-image/dist/styles.css";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +42,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { fetchProvinces, fetchDistricts } from '../../Redux/province';
 const MyOrder = () => {
   const userID = Cookies.get("userID");
   const [products, setProducts] = useState([]);
@@ -310,6 +311,7 @@ const MyOrder = () => {
               </Button>
             ))}
           </div>
+
           <Box m="4">
             <Text fontWeight="700" fontSize="20px" ml="1" color="green">
               Tổng chi tiêu: {formatCurrency(totalExpenditure)}
@@ -590,36 +592,30 @@ const MyOrder = () => {
                           ref={(e) => (address.current["setstreet"] = e)}
                         />
 
-                        <Select
-                          id="provinces"
-                          onChange={handleProvinceChange}
-                          value={selectedProvince || ""}
-                          ref={(e) => (address.current["setcity"] = e)}
-                        >
-                          <option value="">Chọn tỉnh / thành phố</option>
-                          {provinces.map((province) => (
-                            <option key={province.code} value={province.name}>
-                              {province.name}
-                            </option>
-                          ))}
-                        </Select>
-                        <Select
-                          id="districts"
-                          onChange={handleDistrictChange}
-                          value={selectedDistrict.name || ""}
-                          ref={(e) => (address.current["setstate"] = e)}
-                        >
-                          <option value="">Chọn quận / huyện</option>
-                          {districts.map((district) => (
-                            <option
-                              key={district.code}
-                              value={district.name}
-                              data-code={district.code}
-                            >
-                              {district.name}
-                            </option>
-                          ))}
-                        </Select>
+<Select
+                ref={(el) => (address.current.setstate = el)}
+                value={selectedProvince}
+                onChange={handleProvinceChange}
+              >
+                <option  value="">Chọn tỉnh/thành phố</option>
+                {provinces.map((province) => (
+                  <option key={province.province_id} value={province.province_id}>
+                    {province.province_name}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                ref={(el) => (address.current.setcity = el)}
+                value={selectedDistrict}
+                onChange={handleDistrictChange}
+              >
+                <option value="">Chọn quận/huyện</option>
+                {districts.map((district) => (
+                  <option >
+                    {district.district_name}
+                  </option>
+                ))}
+              </Select>
 
                         <Input
                           type="number"
@@ -662,10 +658,10 @@ const MyOrder = () => {
           w={["94%", "100%", "98%"]}
           bg="#eaeaea"
         >
-          <InputLeftElement
+          {/* <InputLeftElement
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
-          />
+          /> */}
         </InputGroup>
         {renderProducts()}
         <br />

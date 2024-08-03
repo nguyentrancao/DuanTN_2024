@@ -203,7 +203,7 @@ const Quanlysanpham = () => {
                     </a>
                   </div>
 
-                  <div class="col-sm-2">
+                  {/* <div class="col-sm-2">
                     <a
                       class="btn btn-delete btn-sm"
                       type="button"
@@ -212,7 +212,7 @@ const Quanlysanpham = () => {
                     >
                       <i class="fas fa-trash-alt"></i> Xóa tất cả{" "}
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <InputGroup margin={"10px"} w={"98%"} bg="#eaeaea">
                   <InputLeftElement

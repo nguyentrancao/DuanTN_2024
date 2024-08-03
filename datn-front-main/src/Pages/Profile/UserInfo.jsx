@@ -11,7 +11,7 @@ export default function UserInfo({ address }) {
           class="relative flex shrink-0 overflow-hidden mb-3 w-32 h-32 rounded-full border-4 border-white"
           src="https://icon-library.com/images/free-avatar-icon/free-avatar-icon-10.jpg"
         ></img>
-        <h3 class="tracking-tight text-white text-2xl font-bold">admin</h3>
+        <h3 class="tracking-tight text-white text-2xl font-bold">{address.username}</h3>
       </div>
       <div class="p-8">
         <div class="space-y-4">

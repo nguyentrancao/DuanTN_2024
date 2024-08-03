@@ -30,9 +30,9 @@ const CheckoutPage = () => {
   const [val, setVal] = useState("");
   const toast = useToast();
   const [change, setChange] = useState(false);
-
+// áp mã giảm giá sp
   const handleApply = () => {
-    if (val === "DUANTN" || val === "JAGUARS") {
+    if (val === "DUANTN" || val === "FPOLYTECHNIC") {
       dispatch({ type: "code", payload: val });
       setVal("");
       toast({

@@ -625,14 +625,14 @@ function Navbar() {
               <Link to="/">
                 <Box>
                   <Image
-                    src={require("./Images/logodesktop.png")}
+                    src={require("./Images/logo.png")}
                     alt="logo"
                     h={"60px"}
                     w="200px"
                   />
                 </Box>
               </Link>
-
+{/* set điều kiện admin = 1 */}
               {admin === 1 && (
                 <Link to="/admin/dashboard">
                   <Flex

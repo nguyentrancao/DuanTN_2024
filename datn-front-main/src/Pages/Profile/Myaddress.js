@@ -1,4 +1,4 @@
-import "./cartstyle.css";
+// import "./cartstyle.css";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -27,9 +27,9 @@ import { Icon } from "@chakra-ui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import "react-slideshow-image/dist/styles.css";
 import uuid from "react-uuid";
-import { fetchProvinces, fetchDistricts } from '../../Redux/province';
+import { fetchProvinces, fetchDistricts } from "../../Redux/province";
 
-const Address = () => {
+const Myaddress = () => {
   const breakpoints = {
     base: "320px",
     sm: "480px",
@@ -52,8 +52,7 @@ const Address = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isValidQH, setIsValidQH] = useState(true);
-  const [provinceName, setProvinceName] = useState('');
-
+  const [provinceName, setProvinceName] = useState("");
 
   const handleInputChangeHo = (e) => {
     const value = e.target.value;
@@ -172,7 +171,11 @@ const Address = () => {
       return;
     }
     const apiUrl = `${process.env.REACT_APP_DATABASE_API_URL}/users/address`;
-    if (!addressData || !Array.isArray(addressData) || addressData.length === 0) {
+    if (
+      !addressData ||
+      !Array.isArray(addressData) ||
+      addressData.length === 0
+    ) {
       axios
         .post(apiUrl, newAddress)
         .then((response) => {
@@ -214,7 +217,9 @@ const Address = () => {
   const [addressData, setAddressData] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`)
+      .get(
+        `${process.env.REACT_APP_DATABASE_API_URL}/users/address/${username}`,
+      )
       .then((response) => {
         console.log("Server response:", response.data);
         setAddressData(response.data);
@@ -253,12 +258,12 @@ const Address = () => {
     }
 
     const selectedProvinceObj = provinces.find(
-      (province) => province.province_id === provinceCode
+      (province) => province.province_id === provinceCode,
     );
     if (selectedProvinceObj) {
       setProvinceName(selectedProvinceObj.province_name);
     } else {
-      setProvinceName(''); // Xóa tên thành phố nếu không tìm thấy
+      setProvinceName(""); // Xóa tên thành phố nếu không tìm thấy
     }
   };
 
@@ -266,28 +271,36 @@ const Address = () => {
     const districtCode = e.target.value;
     setSelectedDistrict(districtCode);
   };
-  console.log(districts,"log");
+  console.log(districts, "log");
 
   const renderAddressData = () => {
-    if (!addressData || !Array.isArray(addressData) || addressData.length === 0) {
+    if (
+      !addressData ||
+      !Array.isArray(addressData) ||
+      addressData.length === 0
+    ) {
       return (
         <Box w={{ "2xl": "66%", base: "80%" }}>
-          <Text mt={{ "2xl": "5", base: "0" }} fontSize="15px" fontWeight="500" fontStyle="italic" width="100%">
+          <Text
+            mt={{ "2xl": "5", base: "0" }}
+            fontSize="15px"
+            fontWeight="500"
+            fontStyle="italic"
+            width="100%"
+          >
             Bạn chưa có địa chỉ nhận hàng
           </Text>
         </Box>
       );
     }
 
-
-    console.log(addressData,'llllllll');
-
     return addressData.map((data) => (
       <Accordion allowMultiple key={uuid()}>
         <AccordionItem>
           <h2>
             <Box w="100%" fontSize="18px" fontWeight="500">
-              <Icon as={FaMapMarkerAlt} color="green.500" /> Địa chỉ giao hàng ccc {data.lastname}
+              <Icon as={FaMapMarkerAlt} color="green.500" /> Địa chỉ giao hàng
+              ccc {data.lastname}
             </Box>
           </h2>
           <Box pb={4} display="flex" justifyContent="space-between">
@@ -421,9 +434,12 @@ const Address = () => {
                 value={selectedProvince}
                 onChange={handleProvinceChange}
               >
-                <option  value="">Chọn tỉnh/thành phố</option>
+                <option value="">Chọn tỉnh/thành phố</option>
                 {provinces.map((province) => (
-                  <option key={province.province_id} value={province.province_id}>
+                  <option
+                    key={province.province_id}
+                    value={province.province_id}
+                  >
                     {province.province_name}
                   </option>
                 ))}
@@ -435,9 +451,7 @@ const Address = () => {
               >
                 <option value="">Chọn quận/huyện</option>
                 {districts.map((district) => (
-                  <option >
-                    {district.district_name}
-                  </option>
+                  <option>{district.district_name}</option>
                 ))}
               </Select>
               <Button onClick={handleAddressSubmit}>Xác nhận</Button>
@@ -449,4 +463,4 @@ const Address = () => {
   );
 };
 
-export default Address;
+export default Myaddress;
